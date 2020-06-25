@@ -4,6 +4,8 @@ import './App.css';
 import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom'
 
 import {getPositions} from './requests'
+import PositionsSearch from './containers/PositionsSearch'
+
 class App extends React.Component {
   state = {
     positions: [],
@@ -15,21 +17,25 @@ class App extends React.Component {
   }
 
   render() {
-  return (
+    return (
       <Router>
         <div>
           <nav>
             Welcome to the first day of the rest of your life!
             <ul>
               <li><Link to="/">Home</Link></li>
+              <li><Link to="/positions">Positions</Link></li>
             </ul>
           </nav>
           <Switch>
+            <Route path='/positions'>
+              <PositionsSearch positions={this.state.positions} />
+            </Route>
             <Route path='/'>
               <div>Home</div>
             </Route>
           </Switch>
-    </div>
+        </div>
       </Router>
     )
   }
