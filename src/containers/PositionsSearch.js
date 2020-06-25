@@ -2,12 +2,28 @@ import React from 'react'
 import {BrowserRouter as Router, Switch, Route, Link, withRouter} from 'react-router-dom'
 
 import Position from '../components/Position'
-class PositionsSearch extends React.Component {
+import PositionsFilter from '../components/PositionsFilter'
 
+class PositionsSearch extends React.Component {
+  state = {
+    filter: ""
+  }
+  
+  handleFilterChange = (event) => {
+    this.setState({filter: event.target.value})
+  }
+
+  filteredPositions = (positions) => {
+    return positions.filter(p => {
+      let name = p.title.toLowerCase()
+      let filter = this.state.filter.toLowerCase()
+      return name.includes(filter)
+    })
+  }
 
   render() {
     let {path, url} = this.props.match
-    let positions = this.props.positions
+    let positions = this.filteredPositions(this.props.positions)
     return (
       <Router>
         <Switch>
