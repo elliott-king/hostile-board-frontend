@@ -14,7 +14,7 @@ const SessionHandler = (props) => {
     return <SignupForm newUserHandler={newUserHandler} />
   }
   let renderLoggedInUser = () => {
-    return <div>Logged in as: {loggedInUser.email}</div>
+    return <div>Logged in as: {loggedInUser.first_name} {loggedInUser.last_name} {loggedInUser.email}</div>
   }
 
   let renderSignupLoginContainer = () => {

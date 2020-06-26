@@ -33,7 +33,7 @@ class PositionsSearch extends React.Component {
             </div>
           </Route>
           <Route path={`${path}/:positionId`}>
-            <Position/>
+            <Position loggedInUser={this.props.loggedInUser}/>
           </Route>
         </Switch>
     )

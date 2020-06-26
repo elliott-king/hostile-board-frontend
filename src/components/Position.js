@@ -32,7 +32,11 @@ const Position = (props) => {
 
   const renderApplication = () => {
     if (!apply) return null 
-    else return <ApplicationForm positionId={position.id} submitApplication={submitApplication}/>
+    else return <ApplicationForm 
+      positionId={position.id} 
+      submitApplication={submitApplication}
+      loggedInUser={props.loggedInUser}
+    />
   }
 
   return (

@@ -165,7 +165,7 @@ class ApplicationForm extends React.Component {
 
   submitApplicationForm = () => {
     let application = {
-      // TODO: user_id: something
+      user_id: this.props.loggedInUser.id,
       position_id: this.props.positionId,
       skills: this.state.experience.skills.map(skill => skill.value),
       job_history: this.state.experience.job_history,

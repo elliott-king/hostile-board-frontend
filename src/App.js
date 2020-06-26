@@ -55,7 +55,10 @@ class App extends React.Component {
               />
             </Route>
             <Route path='/positions'>
-              <PositionsSearch positions={this.state.positions} />
+              <PositionsSearch 
+                positions={this.state.positions}
+                loggedInUser={this.state.loggedInUser}
+              />
             </Route>
             <Route exact path='/'>
               <div>Home</div>
