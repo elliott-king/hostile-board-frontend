@@ -4,6 +4,7 @@ const APPLICATIONS = API + 'applications/'
 const SESSIONS = API + 'sessions/'
 const USERS = API + 'users/'
 const MESSAGES = API + 'messages/'
+const COMPANIES = API + 'companies/'
 
 export const getPositions = async() => {
   let res = await fetch(POSITIONS)
@@ -63,6 +64,13 @@ export const createUser = async(userInfo) => {
 }
 export const getMessage = async(id) => {
   let url = MESSAGES + id
+  let res = await fetch(url)
+  if (res.status !== 200) console.error(res)
+  else return await res.json()
+}
+
+export const getCompany = async(id) => {
+  let url = COMPANIES + id
   let res = await fetch(url)
   if (res.status !== 200) console.error(res)
   else return await res.json()

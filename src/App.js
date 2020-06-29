@@ -7,6 +7,7 @@ import {getPositions, createSession, createUser} from './requests'
 import PositionsSearch from './containers/PositionsSearch'
 import SessionHandler from './containers/SessionHandler'
 import {Message} from './components/Message'
+import {Company} from './components/Company'
 
 class App extends React.Component {
   state = {
@@ -48,6 +49,9 @@ class App extends React.Component {
             </ul>
           </nav>
           <Switch>
+            <Route path={`/companies/:companyId`}>
+              <Company/>
+            </Route>
             <Route path={`/messages/:messageId`}>
               <Message loggedInUser={this.props.loggedInUser}/>
             </Route>
