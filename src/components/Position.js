@@ -31,7 +31,8 @@ const Position = (props) => {
   }
 
   const renderApplication = () => {
-    if (!apply) return null 
+    if (!props.loggedInUser.email) return null
+    if (!apply) return <button onClick={() => setApplying(true)}>Apply</button> 
     else return <ApplicationForm 
       positionId={position.id} 
       submitApplication={submitApplication}
@@ -43,7 +44,6 @@ const Position = (props) => {
     <div>
       <h2>{position.title}</h2>
       <p>{position.description}</p>
-      <button onClick={() => setApplying(true)}>Apply</button>
       {renderApplication()}
     </div>
   )
