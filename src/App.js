@@ -6,6 +6,7 @@ import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom'
 import {getPositions, createSession, createUser} from './requests'
 import PositionsSearch from './containers/PositionsSearch'
 import SessionHandler from './containers/SessionHandler'
+import {Message} from './components/Message'
 
 class App extends React.Component {
   state = {
@@ -47,6 +48,9 @@ class App extends React.Component {
             </ul>
           </nav>
           <Switch>
+            <Route path={`/messages/:messageId`}>
+              <Message loggedInUser={this.props.loggedInUser}/>
+            </Route>
             <Route path='/login'>
               <SessionHandler 
                 loggedInUser={this.state.loggedInUser} 
