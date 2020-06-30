@@ -1,4 +1,4 @@
-export const skillsOptions = [
+const skillsOptions = [
   {value: "data_structures", label: "Data Structures"},
   {value: "sql", label: "SQL"},
   {value: "leadership", label: "Leadership"},
@@ -25,3 +25,4 @@ export const skillsOptions = [
   {value: "inquisitiveness", label: "Inquisitiveness"},
   {value: "networks", label: "Networks"},
 ]
+export default skillsOptions

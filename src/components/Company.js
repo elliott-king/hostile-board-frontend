@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import {useParams, Link} from 'react-router-dom'
 
-import {getCompany} from '../requests'
+import {getCompany} from 'requests'
 
 export const Company = (props) => {
   const {companyId} = useParams()

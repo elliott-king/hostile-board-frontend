@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
-import {getApplicationsForUser, getPositionsForUser, getMessagesForUser} from '../requests'
 import { Link } from 'react-router-dom'
+
+import {getApplicationsForUser, getPositionsForUser, getMessagesForUser} from 'requests'
 
 export const Profile = (props) => {
   const {loggedInUser} = props

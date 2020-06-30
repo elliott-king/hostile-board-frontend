@@ -1,8 +1,8 @@
 import React from 'react'
 import {Switch, Route, Link, withRouter} from 'react-router-dom'
 
-import Position from '../components/Position'
-import PositionsFilter from '../components/PositionsFilter'
+import Position from 'components/Position'
+import PositionsFilter from 'components/PositionsFilter'
 
 class PositionsSearch extends React.Component {
   state = {

@@ -1,8 +1,8 @@
 import React, { useEffect , useState} from 'react'
 import {useParams, Link} from 'react-router-dom'
 
-import { getPosition, createApplication } from '../requests'
-import ApplicationForm from '../containers/ApplicationForm'
+import { getPosition, createApplication } from 'requests'
+import ApplicationForm from 'containers/ApplicationForm'
 
 const Position = (props) => {
   const {positionId} = useParams()

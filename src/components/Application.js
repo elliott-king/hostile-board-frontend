@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react'
 import {useParams, Link} from 'react-router-dom'
 
-import {getApplication, getMessagesForApplication, createMessage} from '../requests'
-import {MessageForm} from './MessageForm'
+import {getApplication, getMessagesForApplication, createMessage} from 'requests'
+import {MessageForm} from 'components/MessageForm'
 
 export const Application = (props) => {
   const {loggedInUser} = props

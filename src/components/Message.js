@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import {useParams, Link} from 'react-router-dom'
 
-import {getMessage} from '../requests'
+import {getMessage} from 'requests'
 
 export const Message = (props) => {
   const {messageId} = useParams()

@@ -2,13 +2,13 @@ import React from 'react';
 import './App.css';
 import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom'
 
-import {getPositions, createSession, createUser} from './requests'
-import PositionsSearch from './containers/PositionsSearch'
-import SessionHandler from './containers/SessionHandler'
-import {Profile} from './containers/Profile'
-import {Message} from './components/Message'
-import {Company} from './components/Company'
-import {Application} from './components/Application'
+import {getPositions, createSession, createUser} from 'requests'
+import PositionsSearch from 'containers/PositionsSearch'
+import SessionHandler from 'containers/SessionHandler'
+import {Profile} from 'containers/Profile'
+import {Message} from 'components/Message'
+import {Company} from 'components/Company'
+import {Application} from 'components/Application'
 
 class App extends React.Component {
   state = {

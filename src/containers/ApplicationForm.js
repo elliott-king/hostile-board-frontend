@@ -1,7 +1,7 @@
 import React from 'react'
 import Select from 'react-select'
 
-import {skillsOptions} from '../constants'
+import skillsOptions from 'constants'
 
 class ApplicationForm extends React.Component {
 
