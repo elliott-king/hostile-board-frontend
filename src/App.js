@@ -1,11 +1,11 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom'
 
 import {getPositions, createSession, createUser} from './requests'
 import PositionsSearch from './containers/PositionsSearch'
 import SessionHandler from './containers/SessionHandler'
+import {Profile} from './containers/Profile'
 import {Message} from './components/Message'
 import {Company} from './components/Company'
 import {Application} from './components/Application'
@@ -19,6 +19,11 @@ class App extends React.Component {
   async componentDidMount() {
     let positions = await getPositions()
     this.setState({positions})
+  }
+
+  renderProfile = () => {
+    if (!this.state.loggedInUser.email) return <p>You must be logged in to view this page.</p>
+    else return <Profile loggedInUser={this.state.loggedInUser} /> 
   }
 
   attemptLogin = async(userLogin) => {
@@ -37,6 +42,11 @@ class App extends React.Component {
     } 
   }
 
+  handleLogout = (event) => {
+    event.preventDefault()
+    this.setState({loggedInUser: {}})
+  }
+
   render() {
     return (
       <Router>
@@ -46,7 +56,9 @@ class App extends React.Component {
             <ul>
               <li><Link to="/">Home</Link></li>
               <li><Link to="/positions">Positions</Link></li>
-              <li><Link to="/login">Log in or sign up</Link></li>
+              {this.state.loggedInUser.email ? null : <li><Link to="/login">Log in or sign up</Link></li>}
+              {this.state.loggedInUser.email ? <li><Link to="/profile">Profile</Link></li> : null}
+              {this.state.loggedInUser.email ? <li><a href="/" onClick={this.handleLogout}>Log Out</a></li> : null}
             </ul>
           </nav>
           <Switch>
@@ -71,6 +83,9 @@ class App extends React.Component {
                 positions={this.state.positions}
                 loggedInUser={this.state.loggedInUser}
               />
+            </Route>
+            <Route path='/profile'>
+              {this.renderProfile()}
             </Route>
             <Route exact path='/'>
               <div>Home</div>

@@ -63,6 +63,22 @@ export const createUser = async(userInfo) => {
   if (res.status !== 200) console.error(res)
   else return await res.json()
 }
+
+export const getApplicationsForUser = async(user) => {
+  let url = USERS + user.id + '/applications'
+  return await defaultGetRequest(url)
+}
+
+export const getPositionsForUser = async(user) => {
+  let url = USERS + user.id + '/positions'
+  return await defaultGetRequest(url)
+}
+
+export const getMessagesForUser = async(user) => {
+  let url = USERS + user.id + '/messages'
+  return await defaultGetRequest(url)
+}
+
 export const getMessage = async(id) => {
   let url = MESSAGES + id
   return await defaultGetRequest(url)
