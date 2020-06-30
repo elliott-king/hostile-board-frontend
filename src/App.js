@@ -1,7 +1,7 @@
 import React from 'react';
-import './App.css';
 import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom'
 
+import 'styles/App.css';
 import {getPositions, createSession, createUser} from 'requests'
 import PositionsSearch from 'containers/PositionsSearch'
 import SessionHandler from 'containers/SessionHandler'
@@ -73,7 +73,7 @@ class App extends React.Component {
             </Route>
             <Route path='/login'>
               <SessionHandler 
-                loggedInUser={this.state.loggedInUser} 
+                loggedInUser={this.state.loggedInUser}
                 attemptLogin={this.attemptLogin} 
               />
             </Route>
@@ -93,7 +93,10 @@ class App extends React.Component {
               {this.renderProfile()}
             </Route>
             <Route exact path='/'>
-              <div>Home</div>
+              <React.Fragment>
+                Welcome to the first day of the rest of your life!
+                <div>Home</div>
+              </React.Fragment>
             </Route>
           </Switch>
         </div>
