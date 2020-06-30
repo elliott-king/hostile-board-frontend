@@ -16,8 +16,10 @@ class PositionsSearch extends React.Component {
   filteredPositions = (positions) => {
     return positions.filter(p => {
       let name = p.title.toLowerCase()
+      let city = p.city.toLowerCase()
+      let company = p.company.name.toLowerCase()
       let filter = this.state.filter.toLowerCase()
-      return name.includes(filter)
+      return (name + city + company).includes(filter)
     })
   }
 
