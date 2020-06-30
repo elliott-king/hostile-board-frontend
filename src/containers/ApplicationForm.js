@@ -6,20 +6,28 @@ import {skillsOptions} from '../constants'
 class ApplicationForm extends React.Component {
 
   // Sections: user data (name, etc), experience, cover letter
-  state = {
-    section: "user_data",
-    user_data: {
-      first_name: "",
-      last_name: "",
-      email_address: "",
-      city: "",
-    },
-    experience: {
-      skills: [],
-      job_history: '',
-      projects: '',
-    },
-    written_introduction: "",
+  constructor(props){
+    super(props)
+    this.state = {
+      section: "user_data",
+      user_data: {
+        first_name: "",
+        last_name: "",
+        email_address: "",
+        city: "",
+      },
+      experience: {
+        skills: [],
+        job_history: '',
+        projects: '',
+      },
+      written_introduction: "",
+    }
+    this.formRef = React.createRef()
+  }
+
+  componentDidMount() {
+    this.formRef.current.scrollIntoView()
   }
 
   fromSnakeCase = (snake) => {
@@ -177,10 +185,10 @@ class ApplicationForm extends React.Component {
 
   render() {
     return (
-      <React.Fragment>
+      <div className="application-form-container" ref={this.formRef}>
         <p>This is the application form.</p>
         {this.renderSection()}
-      </React.Fragment>
+      </div>
     )
   }
 }
