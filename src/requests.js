@@ -6,19 +6,20 @@ const USERS = API + 'users/'
 const MESSAGES = API + 'messages/'
 const COMPANIES = API + 'companies/'
 
-export const getPositions = async() => {
-  let res = await fetch(POSITIONS)
+const defaultGetRequest = async(url) => {
+  let res = await fetch(url)
   if (res.status !== 200) {
     console.error(res)
   } else return await res.json()
 }
 
+export const getPositions = async() => {
+  return await defaultGetRequest(POSITIONS)
+}
+
 export const getPosition = async(id) => {
   let url = POSITIONS + id
-  let res = await fetch(url)
-  if (res.status !== 200) {
-    console.error(res)
-  } else return await res.json()
+  return await defaultGetRequest(url)
 }
 
 export const createApplication = async(application) => {
@@ -64,14 +65,11 @@ export const createUser = async(userInfo) => {
 }
 export const getMessage = async(id) => {
   let url = MESSAGES + id
-  let res = await fetch(url)
-  if (res.status !== 200) console.error(res)
-  else return await res.json()
+  return await defaultGetRequest(url)
 }
 
 export const getCompany = async(id) => {
   let url = COMPANIES + id
-  let res = await fetch(url)
-  if (res.status !== 200) console.error(res)
-  else return await res.json()
+  return await defaultGetRequest(url)
+}
 }
