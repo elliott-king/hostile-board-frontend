@@ -52,11 +52,11 @@ class App extends React.Component {
       <Router>
         <div>
           <nav>
-            Welcome to the first day of the rest of your life!
             <ul>
               <li><Link to="/">Home</Link></li>
               <li><Link to="/positions">Positions</Link></li>
-              {this.state.loggedInUser.email ? null : <li><Link to="/login">Log in or sign up</Link></li>}
+              {this.state.loggedInUser.email ? null : <li><Link to="/login">Log In</Link></li>}
+              {this.state.loggedInUser.email ? null : <li><Link to="/signup">Sign Up</Link></li>}
               {this.state.loggedInUser.email ? <li><Link to="/profile">Profile</Link></li> : null}
               {this.state.loggedInUser.email ? <li><a href="/" onClick={this.handleLogout}>Log Out</a></li> : null}
             </ul>
@@ -75,6 +75,11 @@ class App extends React.Component {
               <SessionHandler 
                 loggedInUser={this.state.loggedInUser} 
                 attemptLogin={this.attemptLogin} 
+              />
+            </Route>
+            <Route path='/signup'>
+              <SessionHandler 
+                loggedInUser={this.state.loggedInUser} 
                 newUserHandler={this.newUser}
               />
             </Route>
