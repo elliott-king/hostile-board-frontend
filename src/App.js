@@ -8,6 +8,7 @@ import PositionsSearch from './containers/PositionsSearch'
 import SessionHandler from './containers/SessionHandler'
 import {Message} from './components/Message'
 import {Company} from './components/Company'
+import {Application} from './components/Application'
 
 class App extends React.Component {
   state = {
@@ -52,8 +53,11 @@ class App extends React.Component {
             <Route path={`/companies/:companyId`}>
               <Company/>
             </Route>
+            <Route path={`/applications/:applicationId`}>
+              <Application loggedInUser={this.state.loggedInUser}/>
+            </Route>
             <Route path={`/messages/:messageId`}>
-              <Message loggedInUser={this.props.loggedInUser}/>
+              <Message loggedInUser={this.state.loggedInUser}/>
             </Route>
             <Route path='/login'>
               <SessionHandler 

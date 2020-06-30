@@ -72,4 +72,32 @@ export const getCompany = async(id) => {
   let url = COMPANIES + id
   return await defaultGetRequest(url)
 }
+
+export const getApplication = async(id) => {
+  let url = APPLICATIONS + id
+  return await defaultGetRequest(url)
+}
+
+export const getMessagesForApplication = async(id) => {
+  let url = APPLICATIONS + id + '/messages'
+  return await defaultGetRequest(url)
+}
+
+export const createMessage = async(applicationId, userId, content) => {
+  let options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    },
+    body: JSON.stringify({
+      application_id: applicationId,
+      user_id: userId, 
+      content: content,
+    })
+  }
+  let res = await fetch(MESSAGES, options)
+  if (res.status !== 200) {
+    console.error(res)
+  } else return await res.json()
 }
