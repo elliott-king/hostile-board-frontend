@@ -1,5 +1,5 @@
 import React, { useEffect , useState} from 'react'
-import {useParams} from 'react-router-dom'
+import {useParams, Link} from 'react-router-dom'
 
 import { getPosition, createApplication } from '../requests'
 import ApplicationForm from '../containers/ApplicationForm'
@@ -30,6 +30,22 @@ const Position = (props) => {
     console.log(ret)
   }
 
+  const renderCompany = () => {
+    if (!position.company) return null
+
+    // Not all companies have logos
+    const renderCompanyImage = (company) => {
+      if (!company.company_logo) return null
+      return <img className="company-logo" src={company.company_logo} alt={`logo of ${company.name}`}/>
+    }
+    return (
+      <div>
+        <h4><Link to={`/companies/${position.company_id}`}>{position.company.name}</Link></h4>
+        {renderCompanyImage(position.company)}
+      </div>
+    )
+  }
+
   const renderApplication = () => {
     if (!props.loggedInUser.email) return null
     if (!apply) return <button onClick={() => setApplying(true)}>Apply</button> 
@@ -43,6 +59,7 @@ const Position = (props) => {
   return (
     <div>
       <h2>{position.title}</h2>
+      {renderCompany()}
       <p>{position.description}</p>
       {renderApplication()}
     </div>

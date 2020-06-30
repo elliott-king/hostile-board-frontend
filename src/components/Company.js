@@ -15,11 +15,16 @@ export const Company = (props) => {
     fetchData()
   }, [companyId])
 
+  const renderCompanyImage = () => {
+    if (!company.company_logo) return null
+    return <img className="company-logo" src={company.company_logo} alt={`logo of ${company.name}`}/>
+  }
+
   const renderPositions = () => {
     if (!company.positions) return null
     return company.positions.map(pos => {
       return (
-        <Link to={`/positions/${pos.id}`}>{pos.title}</Link>
+        <p><Link to={`/positions/${pos.id}`}>{pos.title}</Link></p>
       )
     })
   }
@@ -27,6 +32,7 @@ export const Company = (props) => {
   return (
     <div id="company-container-div">
       <h2>{company.name}</h2>
+      {renderCompanyImage()}
       {renderPositions()}
     </div>
   )
