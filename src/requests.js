@@ -51,16 +51,21 @@ export const createSession = async(userInfo) => {
 }
 
 export const createUser = async(userInfo) => {
+  const {pdf, email, first_name, last_name} = userInfo
+  const formData = new FormData()
+  formData.append('pdf', pdf)
+  formData.append('email', email)
+  formData.append('first_name', first_name)
+  formData.append('last_name', last_name)
   let options = {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json',
       'Accept': 'application/json',
     },
-    body: JSON.stringify(userInfo)
+    body: formData,
   }
   let res = await fetch(USERS, options)
-  if (res.status !== 200) console.error(res)
+  if (res.status !== 200) return res
   else return await res.json()
 }
 
