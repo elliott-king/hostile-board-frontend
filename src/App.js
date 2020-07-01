@@ -37,7 +37,7 @@ class App extends React.Component {
     const newUser = await createUser(userSignup)
     if (newUser.error) console.error("Problem with creating user:", newUser.error)
     else {
-      const loggedInUser = await createSession(newUser)
+      const loggedInUser = newUser
       this.setState({loggedInUser})
     } 
   }
