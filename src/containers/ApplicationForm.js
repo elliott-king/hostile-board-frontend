@@ -1,27 +1,41 @@
 import React from 'react'
 import Select from 'react-select'
+import _ from 'lodash'
 
-import skillsOptions from 'constants'
+import skillsOptions from '../constants'
 
 class ApplicationForm extends React.Component {
 
   // Sections: user data (name, etc), experience, cover letter
   constructor(props){
     super(props)
+    this.skillsOptions = skillsOptions
+    let resume = ""
+    if (props.loggedInUser.resume) resume = JSON.parse(props.loggedInUser.resume)
+
     this.state = {
       section: "user_data",
       user_data: {
-        first_name: "",
-        last_name: "",
-        email_address: "",
+        first_name: props.loggedInUser.first_name ? props.loggedInUser.first_name : "",
+        last_name: props.loggedInUser.last_name ? props.loggedInUser.last_name : "",
+        email_address: props.loggedInUser.email ? props.loggedInUser.email : "",
         city: "",
       },
       experience: {
         skills: [],
-        job_history: '',
+        job_history: resume ? resume.experience.join('\n') : "",
         projects: '',
       },
       written_introduction: "",
+    }
+
+    if (resume.skills) {
+      let skills = resume.skills.map(elem => ({
+        value: elem,
+        label: this.fromSnakeCase(elem)
+      }))
+      this.state.experience.skills = skills
+      this.skillsOptions = _.union(skillsOptions, skills)
     }
     this.formRef = React.createRef()
   }
@@ -50,6 +64,7 @@ class ApplicationForm extends React.Component {
                 {this.fromSnakeCase(key)}
                 <input type="text" 
                   name={key} 
+                  value={this.state.user_data[key]}
                   onChange={(event) => this.handleChange('user_data', event)}
                 />
               </label>
@@ -63,6 +78,7 @@ class ApplicationForm extends React.Component {
   }
 
   renderExperienceSection = () => {
+
     return (
       <form
         className="application-form-section"
@@ -73,7 +89,8 @@ class ApplicationForm extends React.Component {
           Skills
           <Select 
             isMulti 
-            options={skillsOptions} 
+            options={this.skillsOptions}
+            defaultValue={this.state.experience.skills}
             value={this.state.experience.skills}
             onChange={this.handleSelectChange}
             menuPlacement="auto"
