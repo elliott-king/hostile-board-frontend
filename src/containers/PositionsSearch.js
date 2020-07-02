@@ -4,6 +4,8 @@ import {Switch, Route, Link, withRouter} from 'react-router-dom'
 import Position from 'components/Position'
 import PositionsFilter from 'components/PositionsFilter'
 
+const _ = require('lodash')
+
 class PositionsSearch extends React.Component {
   state = {
     filter: ""
@@ -14,6 +16,7 @@ class PositionsSearch extends React.Component {
   }
 
   filteredPositions = (positions) => {
+
     return positions.filter(p => {
       let name = p.title.toLowerCase()
       let city = p.city.toLowerCase()
@@ -23,9 +26,25 @@ class PositionsSearch extends React.Component {
     })
   }
 
+  // alternate filter where we just return random garbage
+  // with one letter filter, return 50% of positions
+  // return 5% less with each addtl letter, down to 5% @ 10 letters
+  // beyond 10 letters, return 1 random position
+  randomFilteredPositions = (positions) => {
+
+    let filterLen = this.state.filter.length
+    if (filterLen === 0) return positions
+    let positionsLen = positions.length
+    let count = 1
+    if (filterLen <= 10) {
+      count = Math.ceil(positionsLen * (0.55 - (0.05 * filterLen)))
+    }
+    return _.sampleSize(positions, count)
+  }
+
   render() {
     let {path, url} = this.props.match
-    let positions = this.filteredPositions(this.props.positions)
+    let positions = this.randomFilteredPositions(this.props.positions)
     return (
         <Switch>
           <Route exact path={path}>
