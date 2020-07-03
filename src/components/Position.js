@@ -1,5 +1,5 @@
 import React, { useEffect , useState} from 'react'
-import {useParams, Link} from 'react-router-dom'
+import {useParams, useHistory, Link} from 'react-router-dom'
 
 import { getPosition, createApplication } from 'requests'
 import ApplicationForm from 'containers/ApplicationForm'
@@ -8,6 +8,7 @@ const Position = (props) => {
   const {positionId} = useParams()
   const [position, setPosition] = useState({})
   const [apply, setApplying] = useState(false)
+  const history = useHistory()
 
   // Using useEffect: 
   // https://itnext.io/add-state-and-lifecycle-methods-to-function-components-with-react-hooks-8e2bdc44d43d
@@ -23,11 +24,7 @@ const Position = (props) => {
 
   const submitApplication = async(application) => {
     let ret = await createApplication(application)
-    setApplying(false)
-
-    // TODO: maybe do something with the returned application?
-    // TODO: add a link to the application from this screen if user has already applied to this job
-    console.log(ret)
+    history.push(`/applications/${ret.id}`)
   }
 
   const renderCompany = () => {
