@@ -64,11 +64,11 @@ export const Application = (props) => {
           </div>
           <h2 className="subtitle application-review-title">Projects</h2>
           <div className="container">
-            <p className="notification" style={{whitespace: "pre-wrap"}}>{application.projects}</p>
+            <p className="notification" style={{whiteSpace: "pre-wrap"}}>{application.projects}</p>
           </div>
           <h2 className="subtitle application-review-title">Written Introduction</h2>
           <div className="container">
-            <p className="notification" style={{whitespace: "pre-wrap"}}>{application.written_introduction}</p>
+            <p className="notification" style={{whiteSpace: "pre-wrap"}}>{application.written_introduction}</p>
           </div>
         </div>
       </div>

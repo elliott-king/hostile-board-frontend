@@ -64,7 +64,7 @@ const Position = (props) => {
     <div className="position-container">
       <h1 className="title">{position.title}</h1>
       {renderCompany()}
-      <p style={{whitespace: "pre-wrap"}}>{position.description}</p>
+      <p style={{whiteSpace: "pre-wrap"}}>{position.description}</p>
       {renderApplication()}
     </div>
   )
