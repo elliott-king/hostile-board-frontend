@@ -1,4 +1,4 @@
-const skillsOptions = [
+export const skillsOptions = [
   {value: "data_structures", label: "Data Structures"},
   {value: "sql", label: "SQL"},
   {value: "leadership", label: "Leadership"},
@@ -25,4 +25,22 @@ const skillsOptions = [
   {value: "inquisitiveness", label: "Inquisitiveness"},
   {value: "networks", label: "Networks"},
 ]
-export default skillsOptions
+
+export const messages = [
+  "It's just not a good fit at this time.",
+  "Let's not kid ourselves.",
+  "It is always good to dream, but maybe you should be realistic today.",
+  "With those credentials? I don't think so.",
+  "Make like a bee and bug off.",
+  "Perhaps you should reconsider the life choices that have put you here.",
+  "Time is money. You owe us for wasting ours.",
+  "We are looking for a 10X engineer, not a 0X one.",
+  "At least your mother probably thinks you are special.",
+  "If we had a choice between you and a monkey, we would hire the monkey.",
+  "Perhaps you ended up at the wrong site. Try this site instead: http://disneyjunior.disney.com.au/games",
+  "After reviewing your Facebook, we have determined you are too boring to work here.",
+  "Your resume has been duly placed in the cylindrical filing cabinet.",
+  "Don't worry about waiting for a call.",
+  "There's always next time.",
+  "Some people are born with brains. Some are born with brawn. Congratulations on taking the road less traveled.",
+]

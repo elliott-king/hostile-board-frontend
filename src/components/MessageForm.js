@@ -1,9 +1,18 @@
 import React, {useState} from 'react'
+import _ from 'lodash'
+
+import {messages} from '../constants'
 
 export const MessageForm = (props) => {
   const {handleMessageSubmit, loggedInUser} = props
   const [content, updateContent] = useState("")
   const [show, toggleShow] = useState(false)
+
+  const sendRandomMessage = (event) => {
+    toggleShow(false)
+    const message = _.sample(messages)
+    handleMessageSubmit(message)
+  }
 
   const handleSubmit = (event) => {
     event.preventDefault()
@@ -18,6 +27,7 @@ export const MessageForm = (props) => {
     else return (
       <React.Fragment>
         <button className="button is-info" onClick={() => toggleShow(true)}>New Message</button>
+        <button className="button is-danger" onClick={sendRandomMessage}>Automated Message</button>
       </React.Fragment>
     )
   }

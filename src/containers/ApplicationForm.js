@@ -2,7 +2,7 @@ import React from 'react'
 import Select from 'react-select'
 import _ from 'lodash'
 
-import skillsOptions from '../constants'
+import {skillsOptions} from '../constants'
 
 class ApplicationForm extends React.Component {
 
@@ -86,14 +86,14 @@ class ApplicationForm extends React.Component {
       >
       <div className="field">
         <label className="label">Skills</label>
-          <Select 
-            isMulti 
-            options={this.skillsOptions}
-            defaultValue={this.state.experience.skills}
-            value={this.state.experience.skills}
-            onChange={this.handleSelectChange}
-            menuPlacement="auto"
-          />
+        <Select 
+          isMulti 
+          options={this.skillsOptions}
+          defaultValue={this.state.experience.skills}
+          value={this.state.experience.skills}
+          onChange={this.handleSelectChange}
+          menuPlacement="auto"
+        />
       </div>
       <div className="field">
         <label className="label">Job History</label>
