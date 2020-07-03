@@ -16,14 +16,14 @@ class ApplicationForm extends React.Component {
     this.state = {
       section: "user_data",
       user_data: {
-        first_name: props.loggedInUser.first_name ? props.loggedInUser.first_name : "",
-        last_name: props.loggedInUser.last_name ? props.loggedInUser.last_name : "",
-        email_address: props.loggedInUser.email ? props.loggedInUser.email : "",
+        first_name: props.loggedInUser.first_name ? this.insertSmallTypos(props.loggedInUser.first_name) : "",
+        last_name: props.loggedInUser.last_name ? this.insertSmallTypos(props.loggedInUser.last_name) : "",
+        email_address: props.loggedInUser.email ? this.insertSmallTypos(props.loggedInUser.email) : "",
         city: "",
       },
       experience: {
         skills: [],
-        job_history: resume ? resume.experience.join('\n') : "",
+        job_history: resume ? this.insertSmallTypos(resume.experience.join('\n')) : "",
         projects: '',
       },
       written_introduction: "",
@@ -42,6 +42,23 @@ class ApplicationForm extends React.Component {
 
   componentDidMount() {
     this.formRef.current.scrollIntoView()
+  }
+
+  insertSmallTypos = (string) => {
+    const typoAt = (string, i) => {
+      const randVal = Math.floor(Math.random() * 32)
+      let randChar = ""
+      if (randVal < 26) randChar = String.fromCharCode(97 + randVal)
+      return string.substr(0, i) + randChar + string.substring(i + 1)
+    }
+    let i = 0
+    while (i < string.length) {
+      const pctChanceToChange = 0.01
+      const isChanged = Math.random() < pctChanceToChange
+      if (isChanged && string[i] !== ' ' && string[i] !== '\n') string = typoAt(string, i)
+      i += 1
+    }
+    return string
   }
 
   fromSnakeCase = (snake) => {
