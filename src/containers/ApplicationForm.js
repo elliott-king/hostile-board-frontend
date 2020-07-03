@@ -59,20 +59,19 @@ class ApplicationForm extends React.Component {
       >
         {Object.keys(this.state.user_data).map(key => {
           return (
-            <React.Fragment key={key}>
-              <label>
-                {this.fromSnakeCase(key)}
+            <div className="field">
+              <label className="label">{this.fromSnakeCase(key)}</label>
+              <div className="control">
                 <input type="text" 
                   name={key} 
                   value={this.state.user_data[key]}
                   onChange={(event) => this.handleChange('user_data', event)}
                 />
-              </label>
-              <br/>
-            </React.Fragment>
+              </div>
+            </div>
           )
         })}
-        <input type="submit" value="Next"/>
+        <input className="button is-success" type="submit" value="Next"/>
       </form>
     )
   }
@@ -85,8 +84,8 @@ class ApplicationForm extends React.Component {
         id="application-user-data"
         onSubmit={this.handleSectionSubmit}
       >
-        <label>
-          Skills
+      <div className="field">
+        <label className="label">Skills</label>
           <Select 
             isMulti 
             options={this.skillsOptions}
@@ -95,25 +94,31 @@ class ApplicationForm extends React.Component {
             onChange={this.handleSelectChange}
             menuPlacement="auto"
           />
-        </label>
-        <label>
-          Job History
+      </div>
+      <div className="field">
+        <label className="label">Job History</label>
+        <div className="control">
           <textarea 
+            className="textarea"
+            rows={10}
             value={this.state.experience.job_history} 
             name="job_history"
             onChange={(event) => this.handleChange('experience', event)}
           />
-        </label>
-        <br/>
-        <label>
-          Projects
+        </div>
+      </div>
+      <div className="field">
+        <label className="label">Projects</label>
+        <div className="control">
           <textarea 
+            className="textarea "
             value={this.state.experience.projects} 
             name="projects"
             onChange={(event) => this.handleChange('experience', event)}
           />
-        </label>
-        <input type="submit" value="Next" />
+        </div>
+      </div>
+        <input className="button is-success" type="submit" value="Next" />
       </form>
     )
   }
@@ -125,16 +130,19 @@ class ApplicationForm extends React.Component {
         id="application-user-data"
         onSubmit={this.handleSectionSubmit}
       >
-        <label>
-          Why are you interested in this job?
+        <div className="field">
+          <label className="label">Why are you interested in this job?</label>
+          <div className="control">
           <textarea 
+            className="textarea"
             type="textinput" 
             value={this.state.written_introduction}
             name="written_introduction"
             onChange={(event) => this.setState({written_introduction: event.target.value})}
             />
-        </label>
-        <input type="submit" value="Submit"/>
+          </div>
+        </div>
+        <input className="button is-warning" type="submit" value="Submit"/>
       </form>
     )
   }
@@ -203,7 +211,6 @@ class ApplicationForm extends React.Component {
   render() {
     return (
       <div className="application-form-container" ref={this.formRef}>
-        <p>This is the application form.</p>
         {this.renderSection()}
       </div>
     )

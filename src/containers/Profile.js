@@ -32,24 +32,42 @@ export const Profile = (props) => {
     if (loggedInUser.is_company) {
       return (
         <div id="company-applications" className="profile-applications-container">
-        <h4>Applicants</h4>
-        {applications.map(app => {
-          return (
-            <div key={app.id}>
-              <p><strong>{app.user.first_name} {app.user.last_name}</strong> for:</p>
-              <p><Link to={`/applications/${app.id}`}>{app.position.title}</Link></p>
-            </div>
-          )
-        })}
+          <h4 className="subtitle">Your Applicants</h4>
+          <div className="company-positions-container">
+            {applications.map((app, index) => {
+              const color = index % 2 ? "patch-white" : "patch-grey"
+              return (
+                <Link key={app.id} to={`/applications/${app.id}`}>
+                  <div className={`columns position-card ${color}`}>
+                    <p className="has-text-left column is-one-quarter"><strong>{app.user.first_name} {app.user.last_name}</strong></p>
+                    <p className="column">{app.position.title}</p>
+                  </div>
+                </Link>
+              )
+            })}
+          </div>
         </div>
       )
     }
     else {
       return (
         <div id="user-applications" className="profile-applications-container">
-          <h4>Your Applications</h4>
-          {applications.map(app => {
-            return <p key={app.id}><Link to={`/applications/${app.id}`}>{app.position.title}</Link></p>
+          <h4 className="subtitle">Your Applications</h4>
+          {applications.map((app, index) => {
+            const color = index % 2 ? "patch-white" : "patch-grey"
+            return (
+              <Link key={app.id} to={`/applications/${app.id}`}>
+                <div id={`application-${app.id}`} className={`position-card ${color}`}>
+                  <div className="position-card-title">
+                      <h3 className="subtitle">{app.position.title}</h3>
+                    </div>
+                  <div className="position-card-body columns">
+                      <p className="column is-three-quarters">{app.position.company.name}</p>
+                      <p className="column">{app.position.city}</p>
+                  </div>
+                </div>
+              </Link>
+            )
           })}
         </div>
       )
@@ -58,18 +76,35 @@ export const Profile = (props) => {
   const renderPositions = () => {
     if (!loggedInUser.is_company) return null
     return (
-      <div id="company-positions">
-      <h4>Your Postings</h4>
-        {positions.map(pos => {
-          return <p key={pos.id}><Link to={`/positions/${pos.id}`}>{pos.title}</Link></p>
-        })}
-      </div>
+      <React.Fragment>
+        <div id="company-positions">
+          <h4 className="subtitle">Your Postings</h4>
+          <div className="company-positions-container">
+            {positions.map((pos, index) => {
+                const color = index % 2 ? "patch-white" : "patch-grey"
+                return (
+                  <Link key={pos.id} to={`/positions/${pos.id}`}>
+                    <div id={`positions-${pos.id}`} className={`columns position-card ${color}`}>
+                        <p className="has-text-left column">{pos.title}</p>
+                        <p className="column is-one-quarter">{pos.city}</p>
+                    </div>
+                  </Link>
+                )
+            })}
+          </div>
+          <button className="button is-info" style={{float: "right", margin: "0.5rem 1rem"}}>New Position</button>
+        </div>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+      </React.Fragment>
     )
   }
   const renderMessages = () => {
     return (
       <div id="user-messages">
-        <h4>Inbox</h4>
+        <h4 className="subtitle">Inbox</h4>
         {messages.map(message => <p key={message.id}><Link to={`/messages/${message.id}`} >{message.content}</Link></p>)}
       </div>
     )
@@ -77,8 +112,8 @@ export const Profile = (props) => {
   
   return (
     <div id="user-profile">
-      <h4>Welcome, {loggedInUser.first_name}</h4>
-      {renderMessages()}
+      <h1 className="title">Welcome, {loggedInUser.first_name}</h1>
+      {/* {renderMessages()} */}
       {renderPositions()}
       {renderApplications()}
     </div>

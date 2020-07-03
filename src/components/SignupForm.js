@@ -39,29 +39,73 @@ export default class LoginForm extends React.Component {
       addedfile: (file) => this.setState({pdf: file}),
     }
     return (
-      <form id="login-form" onSubmit={this.handleSubmit}>
-        <label>
-          Email
-          <input type="text" name="email" value={this.state.email} onChange={this.handleChange} />
-        </label>
-        <label>
-          First Name
-          <input type="text" name="first_name" value={this.state.first_name} onChange={this.handleChange} />
-        </label>
-        <label>
-          Last Name
-          <input type="text" name="last_name" value={this.state.last_name} onChange={this.handleChange} />
-        </label>
-        <DropzoneComponent 
-          config={dropzoneConfig}
-          eventHandlers={dropzoneEventHandlers}
-          djsConfig={djsConfig}
-        />
-        <label>
-          Password 
-          <input type="password" name="password" value={this.state.password} onChange={this.handleChange} />
-        </label>
-        <input type="submit" value="Sign Up"/>
+      <form id="signup-form" onSubmit={this.handleSubmit}>
+        <div className="field">
+          <div className="control has-icons-left">
+            <input 
+              type="email"
+              name="email"
+              value={this.state.email}
+              onChange={this.handleChange}
+              className="input"
+              placeholder="Email"
+            />
+            <span className="icon is-small is-left">
+              <i className="fas fa-envelope"></i>
+            </span>
+          </div>
+        </div>
+        <div className="field is-grouped">
+          {/* <label className="label">Name</label> */}
+          <div className="control">
+            <input 
+              type="text"
+              name="first_name"
+              value={this.state.first_name}
+              onChange={this.handleChange}
+              className="input"
+              placeholder="First Name"
+            />
+          </div>
+          <div className="control">
+            <input 
+              type="text"
+              name="last_name"
+              value={this.state.last_name}
+              onChange={this.handleChange}
+              className="input"
+              placeholder="Last Name"
+            />
+          </div>
+        </div>
+        <div className="field">
+          <label className="label">Upload your resume</label>
+          <DropzoneComponent 
+            config={dropzoneConfig}
+            eventHandlers={dropzoneEventHandlers}
+            djsConfig={djsConfig}
+          />
+        </div>
+        <div className="field">
+          <div className="control has-icons-left">
+            <input 
+              type="password" 
+              name="password" 
+              value={this.state.password} 
+              onChange={this.handleChange}
+              className="input"
+              placeholder="Password"
+            />
+            <span className="icon is-small is-left">
+              <i className="fas fa-lock"></i>
+            </span>
+          </div>
+        </div>
+        <div className="field">
+          <div className="control">
+            <input type="submit" className="button" value="Sign Up"/>
+          </div>
+        </div>
       </form>
     )
   }

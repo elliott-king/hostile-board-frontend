@@ -42,16 +42,55 @@ class PositionsSearch extends React.Component {
     return _.sampleSize(positions, count)
   }
 
+  renderPositions = (positions, url) => {
+    const positionCard = (position, index) => {
+      const color = index % 2 ? "patch-white" : "patch-grey"
+      return (
+        <Link key={position.id} to={`${url}/${position.id}`}>
+          <div id={`position-${position.id}`} className={`position-card ${color}`}>
+            <div className="position-card-title">
+                <h3 className="subtitle">{position.title}</h3>
+              </div>
+            <div className="position-card-body columns">
+                <p className="column is-three-quarters">{position.company.name}</p>
+                <p className="column">{position.city}</p>
+            </div>
+          </div>
+        </Link>
+      )
+    }
+
+    return (
+      <div className="positions-cards">
+        {positions.map((p, index) => positionCard(p, index))}
+      </div>
+    )
+  }
+
   render() {
     let {path, url} = this.props.match
     let positions = this.randomFilteredPositions(this.props.positions)
     return (
         <Switch>
           <Route exact path={path}>
+            <section className="hero">
+              <div className="hero-body">
+                <h1 className="title">Open Positions</h1>
+              </div>
+            </section>
+            <section className="positions-search">
+              <div className="columns">
+                <div className="positions-container column is-four-fifths">
+                  {this.renderPositions(positions, url)}
+                </div>
+                <div className="search-container column">
+                  <h3 className="subtitle">
+                    Search Positions
+                  </h3>
             <PositionsFilter handleFilterChange={this.handleFilterChange} filter={this.state.filter}/>
-            <div id="positions-cards">
-              {positions.map(p => <div key={p.id}><Link to={`${url}/${p.id}`}>{p.title}</Link></div>)}
+                </div>
             </div>
+            </section>
           </Route>
           <Route path={`${path}/:positionId`}>
             <Position loggedInUser={this.props.loggedInUser}/>

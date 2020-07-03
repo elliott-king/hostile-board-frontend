@@ -2,6 +2,8 @@ import React from 'react';
 import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom'
 
 import 'styles/App.css';
+import 'bulma/css/bulma.css'
+
 import {getPositions, createSession, createUser} from 'requests'
 import PositionsSearch from 'containers/PositionsSearch'
 import SessionHandler from 'containers/SessionHandler'
@@ -43,24 +45,44 @@ class App extends React.Component {
   }
 
   handleLogout = (event) => {
-    event.preventDefault()
     this.setState({loggedInUser: {}})
+  }
+
+  renderNoUserButtons = () => {
+    return (
+      <React.Fragment>
+        <Link className="button is-primary" to="/login">Log In</Link>
+        <Link className="button" to="/signup">Sign Up</Link>
+      </React.Fragment>
+    )
+  }
+
+  renderIsUserButtons = () => {
+    return (
+      <a href="/" className="button" onClick={this.handleLogout}>Log Out</a>
+    )
   }
 
   render() {
     return (
       <Router>
-        <div>
-          <nav>
-            <ul>
-              <li><Link to="/">Home</Link></li>
-              <li><Link to="/positions">Positions</Link></li>
-              {this.state.loggedInUser.email ? null : <li><Link to="/login">Log In</Link></li>}
-              {this.state.loggedInUser.email ? null : <li><Link to="/signup">Sign Up</Link></li>}
-              {this.state.loggedInUser.email ? <li><Link to="/profile">Profile</Link></li> : null}
-              {this.state.loggedInUser.email ? <li><a href="/" onClick={this.handleLogout}>Log Out</a></li> : null}
-            </ul>
-          </nav>
+        <nav className="navbar is-dark" role="navigation" aria-label="main-navigation">
+          <div id="bulma-navbar" className="navbar-menu">
+            <div className="navbar-start">
+              <Link className="navbar-item" to="/">Home</Link>
+              <Link to="/positions" className="navbar-item">Positions</Link>
+              {this.state.loggedInUser.email ? <Link className="navbar-item" to="/profile">Profile</Link> : null}
+            </div>
+            <div className="navbar-end">
+              <div className="navbar-item">
+                <div className="buttons">
+                  {this.state.loggedInUser.email ? this.renderIsUserButtons() : this.renderNoUserButtons()}
+                </div>
+              </div>
+            </div>
+          </div>
+        </nav>
+        <div className="centerpiece">
           <Switch>
             <Route path={`/companies/:companyId`}>
               <Company/>
@@ -100,6 +122,18 @@ class App extends React.Component {
             </Route>
           </Switch>
         </div>
+        <footer className="patch-footer">
+          <div className="columns">
+            <div className="column is-one-quarter">
+              Feedback
+            </div>
+            <div className="column">
+              <div className="content has-text-centered">
+                <p>Hostile Job Board by Elliott King</p>
+              </div>
+            </div>
+          </div>
+        </footer>
       </Router>
     )
   }

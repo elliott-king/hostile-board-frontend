@@ -8,21 +8,36 @@ export const MessageForm = (props) => {
   const handleSubmit = (event) => {
     event.preventDefault()
     toggleShow(false)
+    updateContent("")
     handleMessageSubmit(content)
   }
 
   // FIXME: currently only allow companies to send message
   const renderFormButton = () => {
     if (show || !loggedInUser.is_company) return null
-    else return <button onClick={() => toggleShow(true)}>New Message</button>
+    else return (
+      <React.Fragment>
+        <button className="button is-info" onClick={() => toggleShow(true)}>New Message</button>
+      </React.Fragment>
+    )
   }
 
   const renderForm = () => {
     if (!show || !loggedInUser.is_company) return null
     else return (
       <form onSubmit={handleSubmit} >
-        <input type="text" value={content} onChange={(e) => updateContent(e.target.value)} />
-        <input type="submit" value="New Message" />
+      <div className="field">
+        <div className="control">
+        <textarea 
+          className="textarea"
+          type="text" 
+          value={content} 
+          onChange={(e) => updateContent(e.target.value)}
+        />
+        </div>
+      </div>
+        <input className="button is-primary" type="submit" value="Send" />
+        <button className="button is-warn" onClick={() => toggleShow(false)}>Cancel</button>
       </form>
     )
   }

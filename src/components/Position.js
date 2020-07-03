@@ -36,28 +36,35 @@ const Position = (props) => {
       return <img className="company-logo" src={company.company_logo} alt={`logo of ${company.name}`}/>
     }
     return (
-      <div>
-        <h4><Link to={`/companies/${position.company_id}`}>{position.company.name}</Link></h4>
-        {renderCompanyImage(position.company)}
+      <div className="position-company-card">
+        <Link to={`/companies/${position.company_id}`}>
+          <h4 className="subtitle">{position.company.name}</h4>
+          {renderCompanyImage(position.company)}
+        </Link>
       </div>
     )
   }
 
   const renderApplication = () => {
     if (!props.loggedInUser.email) return null
-    if (!apply) return <button onClick={() => setApplying(true)}>Apply</button> 
-    else return <ApplicationForm 
-      positionId={position.id} 
-      submitApplication={submitApplication}
-      loggedInUser={props.loggedInUser}
-    />
+    if (!apply) return <button className="button is-warning" onClick={() => setApplying(true)}>Apply</button> 
+    else return (
+      <React.Fragment>
+        <hr/>
+        <ApplicationForm 
+          positionId={position.id} 
+          submitApplication={submitApplication}
+          loggedInUser={props.loggedInUser}
+        />
+      </React.Fragment>
+    )
   }
 
   return (
-    <div>
-      <h2>{position.title}</h2>
+    <div className="position-container">
+      <h1 className="title">{position.title}</h1>
       {renderCompany()}
-      <p>{position.description}</p>
+      <p style={{whitespace: "pre-wrap"}}>{position.description}</p>
       {renderApplication()}
     </div>
   )

@@ -33,11 +33,13 @@ export const Application = (props) => {
   }
 
   const renderMessages = () => {
+    if (messages.length < 1) return <p>No messages as of yet.</p>
     return messages.map(m => {
       return (
-        <div key={m.id}>
-          <p>{m.content}</p>
+        <div key={m.id} className="box">
           <p>{(new Date(m.created_at)).toString()}</p>
+          <hr/>
+          <p>{m.content}</p>
           <br/>
         </div>
       )
@@ -48,17 +50,26 @@ export const Application = (props) => {
     if (!application.position) return null
     return (
       <div className="application-overview">
-        <h2><Link to={`/positions/${application.position.id}`}>{application.position.title}</Link></h2>
-        <h4>{application.user.first_name} {application.user.last_name}</h4>
+        <h2 className="title">
+          <Link to={`/positions/${application.position.id}`}>{application.position.title}</Link>
+        </h2>
         <div className="application-submitted">
-          <h5>Email</h5>
-          <p>{application.user.email}</p>
-          <h5>Job History</h5>
-          <p>{application.job_history}</p>
-          <h5>Projects</h5>
-          <p>{application.projects}</p>
-          <h5>Written Introduction</h5>
-          <p>{application.written_introduction}</p>
+          <h2 className="subtitle application-review-title">Email</h2>
+          <div className="container">
+            <p className="notification">{application.user.email}</p>
+          </div>
+          <h2 className="subtitle application-review-title">Job History</h2>
+          <div className="container">
+            <p className="notification" style={{whiteSpace: "pre-wrap"}}>{application.job_history}</p>
+          </div>
+          <h2 className="subtitle application-review-title">Projects</h2>
+          <div className="container">
+            <p className="notification" style={{whitespace: "pre-wrap"}}>{application.projects}</p>
+          </div>
+          <h2 className="subtitle application-review-title">Written Introduction</h2>
+          <div className="container">
+            <p className="notification" style={{whitespace: "pre-wrap"}}>{application.written_introduction}</p>
+          </div>
         </div>
       </div>
     )
@@ -66,14 +77,14 @@ export const Application = (props) => {
   }
 
   return (
-    <div>
+    <div className="application-container">
       {renderApplicationInfo()}
-      <h3>Messages:</h3>
-      {renderMessages()}
+      <h1 className="title application-review-title">Messages:</h1>
       <MessageForm
         handleMessageSubmit={handleMessageSubmit} 
         loggedInUser={loggedInUser} 
       />
+      {renderMessages()}
     </div>
   )
 }

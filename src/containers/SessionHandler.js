@@ -9,13 +9,23 @@ const SessionHandler = (props) => {
   const {path} = useRouteMatch()
 
   let renderLogin = () => {
-    return <LoginForm attemptLogin={attemptLogin} />
+    return (
+      <React.Fragment>
+        <h1 className="title">Log In</h1>
+        <LoginForm attemptLogin={attemptLogin} />
+      </React.Fragment>
+    )
   }
   let renderSignup = () => {
-    return <SignupForm newUserHandler={newUserHandler} />
+    return (
+      <React.Fragment>
+        <h1 className="title">Sign Up</h1>
+        <SignupForm newUserHandler={newUserHandler} />
+      </React.Fragment>
+    )
   }
   let renderLoggedInUser = () => {
-    return <div>Logged in as: {loggedInUser.first_name} {loggedInUser.last_name} {loggedInUser.email}</div>
+    return <h1 className="subtitle">Logged in as: {loggedInUser.first_name} {loggedInUser.last_name} {loggedInUser.email}</h1>
   }
 
   let chooseContainerToRender = () => {
@@ -25,12 +35,11 @@ const SessionHandler = (props) => {
   }
 
   return (
-    <React.Fragment>
-      <p>Session Handler</p>
-      <div className="session-container">
+    <div className="session-container">
+      <div className="session-popout box">
         {chooseContainerToRender()}
       </div>
-    </React.Fragment>
+    </div>
   )
 }
 

@@ -1,24 +1,85 @@
-nav li {
-  float: left;
+html {
+  height: 100%;
 }
 
-nav ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #333;
+body {
+  height: 100%;
 }
 
-nav a {
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
+#root {
+  height: 100%;
+  display: flex;
+  flex-flow: column;
 }
 
-/* Change the link color to #111 (black) on hover */
-nav li a:hover {
-  background-color: #111;
+.centerpiece {
+  flex: 1;
 }
+
+.session-container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* TODO: this is an abomination */
+.patch-footer {
+  background-color: hsl(0, 0%, 21%);
+  color: #fff;
+  padding: 3rem 1.5rem 3rem;
+}
+
+.position-card {
+  padding: 0 1rem;
+}
+
+.position-card p {
+  text-align: right;
+}
+
+.patch-grey {
+  background-color: hsl(0, 0%, 96%);
+  color: black;
+  margin: auto;
+}
+
+.patch-white {
+  background-color: white;
+  color: black;
+  margin: auto;
+}
+
+.application-container {
+  margin: 1rem;
+}
+
+.application-review-title {
+  margin: 1.5rem;
+}
+
+.position-container {
+  display: flex;
+  flex-flow: column;
+  margin: 1rem;
+}
+
+.position-company-card {
+  max-width: 35%;
+  border-color: black;
+  border-style: solid;
+  padding: 1rem;
+  margin: 1rem;
+}
+
+.company-positions-container {
+  margin: 1rem;
+}
+
+/*! debug.css | MIT License | zaydek.github.com/debug.css */
+/* *:not(path):not(g) {
+	color:                    hsla(210, 100%, 100%, 0.9) !important;
+	background:               hsla(210, 100%,  50%, 0.5) !important;
+	outline:    solid 0.25rem hsla(210, 100%, 100%, 0.5) !important;
+	box-shadow: none !important;
+} */
