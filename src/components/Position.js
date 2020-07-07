@@ -52,6 +52,7 @@ const Position = (props) => {
       <React.Fragment>
         <hr/>
         <ApplicationForm 
+          cancelApply={() => setApplying(false)}
           positionId={position.id} 
           submitApplication={submitApplication}
           loggedInUser={props.loggedInUser}

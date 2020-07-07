@@ -44,3 +44,9 @@ export const messages = [
   "There's always next time.",
   "Some people are born with brains. Some are born with brawn. Congratulations on taking the road less traveled.",
 ]
+
+export const clippyMessages = {
+  user_data: "It looks like you are trying to apply for a job. You may need some help with that.",
+  experience: "You don't seem to have a lot of skills. Maybe you should consider getting more!",
+  written_introduction: "Normally, you should try to be yourself. In this case, I don't recommend that.",
+}

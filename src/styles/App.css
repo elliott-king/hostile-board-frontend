@@ -6,6 +6,22 @@ body {
   height: 100%;
 }
 
+#clippy {
+  position: fixed;
+  bottom: 125px;
+  right: 0px;
+  height: 150px;
+  width: 150px;
+  z-index: 1;
+}
+
+#clippy-box {
+  position: fixed;
+  bottom: 125px;
+  right: 0;
+  height: 300px;
+  width: 200px;
+}
 #root {
   height: 100%;
   display: flex;

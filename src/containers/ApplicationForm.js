@@ -2,7 +2,7 @@ import React from 'react'
 import Select from 'react-select'
 import _ from 'lodash'
 
-import {skillsOptions} from '../constants'
+import {skillsOptions, clippyMessages} from '../constants'
 
 class ApplicationForm extends React.Component {
 
@@ -76,7 +76,7 @@ class ApplicationForm extends React.Component {
       >
         {Object.keys(this.state.user_data).map(key => {
           return (
-            <div className="field">
+            <div className="field" key={`user-data-field-${key}`}>
               <label className="label">{this.fromSnakeCase(key)}</label>
               <div className="control">
                 <input type="text" 
@@ -89,6 +89,7 @@ class ApplicationForm extends React.Component {
           )
         })}
         <input className="button is-success" type="submit" value="Next"/>
+        <button className="button is-danger" onClick={this.props.cancelApply}>Cancel</button>
       </form>
     )
   }
@@ -118,6 +119,7 @@ class ApplicationForm extends React.Component {
           <textarea 
             className="textarea"
             rows={10}
+            spellCheck={false}
             value={this.state.experience.job_history} 
             name="job_history"
             onChange={(event) => this.handleChange('experience', event)}
@@ -125,7 +127,7 @@ class ApplicationForm extends React.Component {
         </div>
       </div>
       <div className="field">
-        <label className="label">Projects</label>
+        <label className="label">Other Projects</label>
         <div className="control">
           <textarea 
             className="textarea "
@@ -136,6 +138,7 @@ class ApplicationForm extends React.Component {
         </div>
       </div>
         <input className="button is-success" type="submit" value="Next" />
+        <button className="button is-danger" onClick={this.props.cancelApply}>Cancel</button>
       </form>
     )
   }
@@ -160,6 +163,7 @@ class ApplicationForm extends React.Component {
           </div>
         </div>
         <input className="button is-warning" type="submit" value="Submit"/>
+        <button className="button is-danger" onClick={this.props.cancelApply}>Cancel</button>
       </form>
     )
   }
@@ -213,6 +217,13 @@ class ApplicationForm extends React.Component {
     if (this.state.section === "written_introduction") return this.renderWrittenIntroductionSection()
   }
 
+  clippyUrl = () => {
+    // I used ezgif.com to edit these gifs.
+    if (this.state.section === "user_data") return "/clippy_scratchhead.gif"
+    if (this.state.section === "experience") return "/clippy_eyebrows_2.gif"
+    if (this.state.section === "written_introduction") return "/clippy_noloop_2.gif"
+  }
+
   submitApplicationForm = () => {
     let application = {
       user_id: this.props.loggedInUser.id,
@@ -227,9 +238,13 @@ class ApplicationForm extends React.Component {
 
   render() {
     return (
-      <div className="application-form-container" ref={this.formRef}>
-        {this.renderSection()}
-      </div>
+      <React.Fragment>
+        <div className="application-form-container" ref={this.formRef}>
+          {this.renderSection()}
+        </div>
+        <img src={this.clippyUrl()} alt="clippy" id="clippy"/>
+        <div className="box" id="clippy-box">{clippyMessages[this.state.section]}</div>
+      </React.Fragment>
     )
   }
 }
