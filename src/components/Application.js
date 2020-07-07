@@ -54,9 +54,12 @@ export const Application = (props) => {
           <Link to={`/positions/${application.position.id}`}>{application.position.title}</Link>
         </h2>
         <div className="application-submitted">
-          <h2 className="subtitle application-review-title">Email</h2>
+          <h2 className="subtitle application-review-title">User</h2>
           <div className="container">
-            <p className="notification">{application.user.email}</p>
+          <div className="notification">
+            <p>{application.user.first_name} {application.user.last_name}</p>
+            <p>{application.user.email}</p>
+          </div>
           </div>
           <h2 className="subtitle application-review-title">Job History</h2>
           <div className="container">
