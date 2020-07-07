@@ -11,11 +11,14 @@ import {Profile} from 'containers/Profile'
 import {Message} from 'components/Message'
 import {Company} from 'components/Company'
 import {Application} from 'components/Application'
+import Feedback from 'components/Feedback';
+import explodeAll from 'explosion'
 
 class App extends React.Component {
   state = {
     positions: [],
     loggedInUser: {},
+    feedback: false,
   }
 
   async componentDidMount() {
@@ -48,6 +51,10 @@ class App extends React.Component {
     this.setState({loggedInUser: {}})
   }
 
+  handleFeedbackSubmit = (content) => {
+    explodeAll()
+  }
+
   renderNoUserButtons = () => {
     return (
       <React.Fragment>
@@ -66,7 +73,7 @@ class App extends React.Component {
   render() {
     return (
       <Router>
-        <nav className="navbar is-dark" role="navigation" aria-label="main-navigation">
+        <nav id="navbar" className="navbar is-dark" role="navigation" aria-label="main-navigation">
           <div id="bulma-navbar" className="navbar-menu">
             <div className="navbar-start">
               <Link className="navbar-item" to="/">Home</Link>
@@ -82,7 +89,7 @@ class App extends React.Component {
             </div>
           </div>
         </nav>
-        <div className="centerpiece">
+        <div id="centerpiece" className="centerpiece">
           <Switch>
             <Route path={`/companies/:companyId`}>
               <Company/>
@@ -122,10 +129,11 @@ class App extends React.Component {
             </Route>
           </Switch>
         </div>
-        <footer className="patch-footer">
+        {this.state.feedback ? <Feedback submit={this.handleFeedbackSubmit}/> : null}
+        <footer id="footer" className="patch-footer">
           <div className="columns">
             <div className="column is-one-quarter">
-              Feedback
+              <button className="button is-dark" onClick={() => this.setState({feedback: true})}>Feedback</button>
             </div>
             <div className="column">
               <div className="content has-text-centered">
