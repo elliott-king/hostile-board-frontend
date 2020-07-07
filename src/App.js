@@ -4,7 +4,7 @@ import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom'
 import 'styles/App.css';
 import 'bulma/css/bulma.css'
 
-import {getPositions, createSession, createUser} from 'requests'
+import {getPositions, createSession, createUser, getUser} from 'requests'
 import PositionsSearch from 'containers/PositionsSearch'
 import SessionHandler from 'containers/SessionHandler'
 import {Profile} from 'containers/Profile'
@@ -45,6 +45,14 @@ class App extends React.Component {
       const loggedInUser = newUser
       this.setState({loggedInUser})
     } 
+  }
+
+  updateUser = async() => {
+    if (!this.state.loggedInUser.email) console.error('Attempting to update user when no use is logged in')
+    else {
+      const user = await getUser(this.state.loggedInUser.id)
+      this.setState({loggedInUser: user})
+    }
   }
 
   handleLogout = (event) => {
@@ -116,6 +124,7 @@ class App extends React.Component {
               <PositionsSearch 
                 positions={this.state.positions}
                 loggedInUser={this.state.loggedInUser}
+                updateUser={this.updateUser}
               />
             </Route>
             <Route path='/profile'>

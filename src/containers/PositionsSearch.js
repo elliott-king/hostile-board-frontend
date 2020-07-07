@@ -91,7 +91,7 @@ class PositionsSearch extends React.Component {
             </section>
           </Route>
           <Route path={`${path}/:positionId`}>
-            <Position loggedInUser={this.props.loggedInUser}/>
+            <Position loggedInUser={this.props.loggedInUser} updateUser={this.props.updateUser}/>
           </Route>
         </Switch>
     )

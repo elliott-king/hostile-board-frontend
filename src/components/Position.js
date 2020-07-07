@@ -19,8 +19,14 @@ const Position = (props) => {
       const position = await getPosition(positionId)
       setPosition(position)
     }
+    const checkAndUpdateUser = async () => {
+      if(props.loggedInUser.email && !props.loggedInUser.resume) {
+        props.updateUser()
+      }
+    }
     fetchData()
-  }, [positionId])
+    checkAndUpdateUser()
+  }, [positionId, props])
 
   const submitApplication = async(application) => {
     let ret = await createApplication(application)
@@ -51,7 +57,7 @@ const Position = (props) => {
     else return (
       <React.Fragment>
         <hr/>
-        <ApplicationForm 
+        <ApplicationForm
           cancelApply={() => setApplying(false)}
           positionId={position.id} 
           submitApplication={submitApplication}

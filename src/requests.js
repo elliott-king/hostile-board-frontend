@@ -69,6 +69,12 @@ export const createUser = async(userInfo) => {
   else return await res.json()
 }
 
+export const getUser = async(userId) => {
+  let res = await fetch(USERS + userId)
+  if (res.status !== 200) return res
+  else return await res.json()
+}
+
 export const getApplicationsForUser = async(user) => {
   let url = USERS + user.id + '/applications'
   return await defaultGetRequest(url)
