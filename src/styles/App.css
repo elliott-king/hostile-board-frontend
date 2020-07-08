@@ -1,5 +1,6 @@
 html {
   height: 100%;
+  overflow-y: auto !important;
 }
 
 body {
@@ -53,6 +54,16 @@ body {
 
 .centerpiece {
   flex: 1;
+}
+
+#main-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  background-image: url("/scott-webb-_K-QKkbn7Ds-unsplash.jpg");
+  background-size: 1500px;
+  background-position: left;
 }
 
 .session-container {

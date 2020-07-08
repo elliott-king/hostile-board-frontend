@@ -131,10 +131,11 @@ class App extends React.Component {
               {this.renderProfile()}
             </Route>
             <Route exact path='/'>
-              <React.Fragment>
+              <div id="main-page">
+                <h1 className="title is-centered">
                 Welcome to the first day of the rest of your life!
-                <div>Home</div>
-              </React.Fragment>
+                </h1>
+              </div>
             </Route>
           </Switch>
         </div>
