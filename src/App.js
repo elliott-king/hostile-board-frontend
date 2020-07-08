@@ -65,16 +65,25 @@ class App extends React.Component {
 
   renderNoUserButtons = () => {
     return (
-      <React.Fragment>
+      <div className="navbar-item">
+        <div className="buttons">
         <Link className="button is-primary" to="/login">Log In</Link>
         <Link className="button" to="/signup">Sign Up</Link>
-      </React.Fragment>
+        </div>
+      </div>
     )
   }
 
   renderIsUserButtons = () => {
     return (
+      <React.Fragment>
+        <div className="navbar-item">
+          <p>{this.state.loggedInUser.first_name} {this.state.loggedInUser.last_name}</p>
+        </div>
+        <div className="navbar-item">
       <a href="/" className="button" onClick={this.handleLogout}>Log Out</a>
+        </div>
+      </React.Fragment>
     )
   }
 
@@ -89,13 +98,9 @@ class App extends React.Component {
               {this.state.loggedInUser.email ? <Link className="navbar-item" to="/profile">Profile</Link> : null}
             </div>
             <div className="navbar-end">
-              <div className="navbar-item">
-                <div className="buttons">
                   {this.state.loggedInUser.email ? this.renderIsUserButtons() : this.renderNoUserButtons()}
                 </div>
               </div>
-            </div>
-          </div>
         </nav>
         <div id="centerpiece" className="centerpiece">
           <Switch>
