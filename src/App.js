@@ -67,8 +67,8 @@ class App extends React.Component {
     return (
       <div className="navbar-item">
         <div className="buttons">
-        <Link className="button is-primary" to="/login">Log In</Link>
-        <Link className="button" to="/signup">Sign Up</Link>
+          <Link className="button is-primary" to="/login">Log In</Link>
+          <Link className="button" to="/signup">Sign Up</Link>
         </div>
       </div>
     )
@@ -81,7 +81,7 @@ class App extends React.Component {
           <p>{this.state.loggedInUser.first_name} {this.state.loggedInUser.last_name}</p>
         </div>
         <div className="navbar-item">
-      <a href="/" className="button" onClick={this.handleLogout}>Log Out</a>
+          <a href="/" className="button" onClick={this.handleLogout}>Log Out</a>
         </div>
       </React.Fragment>
     )
@@ -98,9 +98,9 @@ class App extends React.Component {
               {this.state.loggedInUser.email ? <Link className="navbar-item" to="/profile">Profile</Link> : null}
             </div>
             <div className="navbar-end">
-                  {this.state.loggedInUser.email ? this.renderIsUserButtons() : this.renderNoUserButtons()}
-                </div>
-              </div>
+              {this.state.loggedInUser.email ? this.renderIsUserButtons() : this.renderNoUserButtons()}
+            </div>
+          </div>
         </nav>
         <div id="centerpiece" className="centerpiece">
           <Switch>
@@ -138,7 +138,7 @@ class App extends React.Component {
             <Route exact path='/'>
               <div id="main-page">
                 <h1 className="title is-centered">
-                Welcome to the first day of the rest of your life!
+                  Welcome to the first day of the rest of your life!
                 </h1>
               </div>
             </Route>
@@ -152,7 +152,7 @@ class App extends React.Component {
             </div>
             <div className="column">
               <div className="content has-text-centered">
-                <p>Hostile Job Board by Elliott King</p>
+                <p>Adversity Job Board by Elliott King</p>
               </div>
             </div>
           </div>
