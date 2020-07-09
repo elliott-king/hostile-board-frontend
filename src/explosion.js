@@ -5,7 +5,7 @@ const rand = (min, max) => {
   return Math.random() * (max - min) + min;
 }
 		
-const handleExplosion = (divId) => {
+const handleExplosion = (divId, callback) => {
   const child = document.getElementById(divId)
   const parent = child.parentElement
 
@@ -61,6 +61,7 @@ const handleExplosion = (divId) => {
   }
 
   const explode = () => {
+    let total = 0
     parent.querySelectorAll('.clipped').forEach(element => {
       const initialBot = parseFloat(window.getComputedStyle(element).bottom)
       const initialLeft = parseFloat(window.getComputedStyle(element).left)
@@ -103,9 +104,10 @@ const handleExplosion = (divId) => {
         time = time + 0.10
 
         if (time > totalTime) {
+          total += 1
           element.remove()
-
           clearInterval(interval)
+          if (total > 24) callback()
         }
       }, 10)
     })
@@ -117,10 +119,16 @@ const handleExplosion = (divId) => {
 
 const explodeAll = () => {
   const divs = ["feedback-container", "footer", "centerpiece", "navbar"]
-  handleExplosion(divs[0])
-  setTimeout(() => handleExplosion(divs[1]), 3000)
-  setTimeout(() => handleExplosion(divs[2]), 6000)
-  setTimeout(() => handleExplosion(divs[3]), 9000)
+  handleExplosion(divs[0], () => {
+    handleExplosion(divs[1], () => {
+      handleExplosion(divs[2], () => {
+        handleExplosion(divs[3], () => console.log('done!'))
+      })
+    })
+  })
+  // setTimeout(() => handleExplosion(divs[1]), 3000)
+  // setTimeout(() => handleExplosion(divs[2]), 6000)
+  // setTimeout(() => handleExplosion(divs[3]), 9000)
 }
 
 export default explodeAll
