@@ -1,4 +1,4 @@
-const API = 'http://localhost:3000/'
+const API = 'https://adversity.herokuapp.com/'
 const POSITIONS = API + 'positions/'
 const APPLICATIONS = API + 'applications/'
 const SESSIONS = API + 'sessions/'
