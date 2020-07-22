@@ -33,4 +33,4 @@ To run this, simply:
 1. `git clone https://github.com/elliott-king/adversity-board-frontend.git`
 2. `yarn install`
 3. Make sure to change the url in `requests.js` to the localhost port the backend is running on (you can also leave as-is, and it will connect to my heroku backend)
-4. `yarn dev`
+4. `yarn start`
