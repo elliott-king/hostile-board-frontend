@@ -1,4 +1,4 @@
-const API = 'https://adversity.herokuapp.com/'
+const API = 'https://adversity-backend.herokuapp.com/'
 const POSITIONS = API + 'positions/'
 const APPLICATIONS = API + 'applications/'
 const SESSIONS = API + 'sessions/'
