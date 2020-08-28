@@ -2,7 +2,7 @@ import React from 'react'
 import Select from 'react-select'
 import _ from 'lodash'
 
-import {skillsOptions, clippyMessages} from '../constants'
+import {skillsOptions, clippyMessages} from '../utils/constants'
 
 class ApplicationForm extends React.Component {
 

@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import _ from 'lodash'
 
-import {messages} from '../constants'
+import {messages} from '../utils/constants'
 
 export const MessageForm = (props) => {
   const {handleMessageSubmit, loggedInUser} = props
