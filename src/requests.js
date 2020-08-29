@@ -1,7 +1,6 @@
 import { fileChecksum } from 'utils/checksum'
 
-// const API = 'https://adversity-backend.herokuapp.com/'
-const API = 'http://localhost:3000/'
+const API = process.env.REACT_APP_API_URL
 const POSITIONS = API + 'positions/'
 const APPLICATIONS = API + 'applications/'
 const SESSIONS = API + 'sessions/'
