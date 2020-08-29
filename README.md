@@ -31,6 +31,6 @@ If you want to run locally, you will need to also set up the sister [backend rep
 
 To run this, simply:
 1. `git clone https://github.com/elliott-king/adversity-board-frontend.git`
-2. `yarn install`
-3. Make sure to change the url in `requests.js` to the localhost port the backend is running on (you can also leave as-is, and it will connect to my heroku backend)
-4. `yarn start`
+2. `npm i`
+3. Create a file at the root called `.env` and add the line `REACT_APP_API_URL=http://localhost:port_backend_is_serving`, or set it to my heroku backend
+4. `npm run dev`
