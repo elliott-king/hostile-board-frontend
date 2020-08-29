@@ -1,3 +1,6 @@
+import { fileChecksum } from 'utils/checksum'
+
+// const API = 'https://adversity-backend.herokuapp.com/'
 const API = 'http://localhost:3000/'
 const POSITIONS = API + 'positions/'
 const APPLICATIONS = API + 'applications/'
@@ -5,6 +8,7 @@ const SESSIONS = API + 'sessions/'
 const USERS = API + 'users/'
 const MESSAGES = API + 'messages/'
 const COMPANIES = API + 'companies/'
+const PRESIGNED_URL = API + 'presigned_url/'
 
 const defaultGetRequest = async(url) => {
   let res = await fetch(url)
@@ -50,23 +54,65 @@ export const createSession = async(userInfo) => {
   else return await res.json()
 }
 
-export const createUser = async(userInfo) => {
-  const {pdf, email, first_name, last_name} = userInfo
-  const formData = new FormData()
-  formData.append('pdf', pdf)
-  formData.append('email', email)
-  formData.append('first_name', first_name)
-  formData.append('last_name', last_name)
+const createPresignedUrl = async(file, byte_size, checksum) => {
   let options = {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
+      'Content-Type': 'application/json',
     },
-    body: formData,
+    body: JSON.stringify({
+      file: {
+        filename: file.name,
+        byte_size: byte_size,
+        checksum: checksum,
+        'content_type': 'application/pdf',
+        metadata: {
+          "message": "resume for parsing"
+        }
+      }
+    })
   }
-  let res = await fetch(USERS, options)
+  let res = await fetch(PRESIGNED_URL, options)
   if (res.status !== 200) return res
-  else return await res.json()
+  return await res.json()
+}
+
+export const createUser = async(userInfo) => {
+  const {pdf, email, first_name, last_name} = userInfo
+
+  // To upload pdf file to S3, we need to do three steps:
+  // 1) request a pre-signed PUT request (for S3) from the backend
+  // 2) send file to said PUT request (to S3)
+  // 3) confirm & create user with backend
+
+  const checksum = await fileChecksum(pdf)
+  const presignedFileParams = await createPresignedUrl(pdf, pdf.size, checksum)
+  
+  const s3PutOptions = {
+    method: 'PUT',
+    headers: presignedFileParams.direct_upload.headers,
+    body: pdf,
+  }
+  let awsRes = await fetch(presignedFileParams.direct_upload.url, s3PutOptions)
+  if (awsRes.status !== 200) return awsRes
+
+  let usersPostOptions = {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      email: email,
+      first_name: first_name,
+      last_name: last_name,
+      pdf: presignedFileParams.blob_signed_id,
+    })
+  }
+  let res = await fetch(USERS, usersPostOptions)
+  if (res.status !== 200) return res 
+  return await res.json()
 }
 
 export const getUser = async(userId) => {
