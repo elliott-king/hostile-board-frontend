@@ -19,6 +19,7 @@ class App extends React.Component {
     positions: [],
     loggedInUser: {},
     feedback: false,
+    navbarToggled: false,
   }
 
   async componentDidMount() {
@@ -65,12 +66,10 @@ class App extends React.Component {
 
   renderNoUserButtons = () => {
     return (
-      <div className="navbar-item">
-        <div className="buttons">
-          <Link className="button is-primary" to="/login">Log In</Link>
-          <Link className="button" to="/signup">Sign Up</Link>
-        </div>
-      </div>
+      <React.Fragment>
+        <Link className="navbar-item" onClick={this.toggleNavbar} to="/login">Log In</Link>
+        <Link className="navbar-item" onClick={this.toggleNavbar} to="/signup">Sign Up</Link>
+      </React.Fragment>
     )
   }
 
@@ -81,21 +80,41 @@ class App extends React.Component {
           <p>{this.state.loggedInUser.first_name} {this.state.loggedInUser.last_name}</p>
         </div>
         <div className="navbar-item">
-          <a href="/" className="button" onClick={this.handleLogout}>Log Out</a>
+          <a href="/" onClick={this.toggleNavbar} className="button" onClick={this.handleLogout}>Log Out</a>
         </div>
       </React.Fragment>
     )
+  }
+
+  toggleNavbar = () => {
+    this.setState(prevState => ({navbarToggled: !prevState.navbarToggled}))
   }
 
   render() {
     return (
       <Router>
         <nav id="navbar" className="navbar is-dark" role="navigation" aria-label="main-navigation">
-          <div id="bulma-navbar" className="navbar-menu">
+          <div className="navbar-brand">
+            <a 
+              role="button" 
+              class={"navbar-burger" + (this.state.navbarToggled ? " is-active" : "")} 
+              aria-label="menu" 
+              aria-expanded="false" 
+              onClick={this.toggleNavbar} 
+            >
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+            </a>
+          </div>
+          <div 
+            className={"navbar-menu" + (this.state.navbarToggled ? " is-active" : "")} 
+            id="navbar-links"
+          >
             <div className="navbar-start">
-              <Link className="navbar-item" to="/">Home</Link>
-              <Link to="/positions" className="navbar-item">Positions</Link>
-              {this.state.loggedInUser.email ? <Link className="navbar-item" to="/profile">Profile</Link> : null}
+              <Link className="navbar-item" onClick={this.toggleNavbar} to="/">Home</Link>
+              <Link to="/positions" onClick={this.toggleNavbar} className="navbar-item">Positions</Link>
+              {this.state.loggedInUser.email ? <Link className="navbar-item" onClick={this.toggleNavbar} to="/profile">Profile</Link> : null}
             </div>
             <div className="navbar-end">
               {this.state.loggedInUser.email ? this.renderIsUserButtons() : this.renderNoUserButtons()}
