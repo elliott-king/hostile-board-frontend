@@ -57,7 +57,7 @@ class App extends React.Component {
   }
 
   handleLogout = (event) => {
-    this.setState({loggedInUser: {}})
+    this.setState({loggedInUser: {}, navbarToggled: false})
   }
 
   handleFeedbackSubmit = (content) => {
@@ -80,7 +80,7 @@ class App extends React.Component {
           <p>{this.state.loggedInUser.first_name} {this.state.loggedInUser.last_name}</p>
         </div>
         <div className="navbar-item">
-          <a href="/" onClick={this.toggleNavbar} className="button" onClick={this.handleLogout}>Log Out</a>
+          <a href="/" className="button" onClick={this.handleLogout}>Log Out</a>
         </div>
       </React.Fragment>
     )
