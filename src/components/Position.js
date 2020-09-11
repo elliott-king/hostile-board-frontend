@@ -5,7 +5,7 @@ import { getPosition, createApplication } from 'requests'
 import ApplicationForm from 'containers/ApplicationForm'
 
 const Position = (props) => {
-  const {email, resume} = props.loggedInUser
+  const {email, resume_text} = props.loggedInUser
   const {updateUser} = props
   const {positionId} = useParams()
   const [position, setPosition] = useState({})
@@ -22,13 +22,13 @@ const Position = (props) => {
       setPosition(position)
     }
     const checkAndUpdateUser = async () => {
-      if(email && !resume) {
+      if(email && !resume_text) {
         updateUser()
       }
     }
     fetchData()
     checkAndUpdateUser()
-  }, [email, resume, updateUser, positionId])
+  }, [email, resume_text, updateUser, positionId])
 
   const submitApplication = async(application) => {
     let ret = await createApplication(application)

@@ -11,7 +11,7 @@ class ApplicationForm extends React.Component {
     super(props)
     this.skillsOptions = skillsOptions
     let resume = ""
-    if (props.loggedInUser.resume) resume = JSON.parse(props.loggedInUser.resume)
+    if (props.loggedInUser.resume_text) resume = JSON.parse(props.loggedInUser.resume_text)
 
     this.state = {
       section: "user_data",
